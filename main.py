@@ -365,7 +365,7 @@ async def txt_handler(bot: Client, m: Message):
     await bot.send_document(log_channel, x)
     await input0.delete(True)
     file_name, ext = os.path.splitext(os.path.basename(x))
-    credit = "Downloaded by " + f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
+    credit = "Downloaded by ➤" + f"[{m.from_user.first_name}](tg://user?id={m.from_user.id})"
     try:         
         with open(x, "r", encoding="utf-8") as f:
              content = f.read()
@@ -458,7 +458,9 @@ async def txt_handler(bot: Client, m: Message):
                         
             namex = links[i].strip().replace(urlm,'') if '://' in links[i].strip() and links[i].strip().replace(url,'') !='' else parsed_url.path.split('/')[-1]
             nameeex = namex if namex != '' and 'NoLinkFound' else 'NA'
-            namme = nameeex.replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("/u","").replace('"','').replace('mp4','').replace('mkv','').replace('m3u8','').strip()[:60] + f"({res})" + "D💫"
+            namme = nameeex.replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("/u","").replace('"','').replace('mp4','').replace('mkv','').replace('m3u8','').strip()[:60] + f"({res})" + " D💫"
+            nammepd = nameeex.replace("\t", "").replace(":", "").replace("/","").replace("+", "").replace("#", "").replace("|", "").replace("@", "").replace("*", "").replace(".", "").replace("/u","").replace('"','').replace('mp4','').replace('mkv','').replace('m3u8','').strip()[:60] + " D💫"
+            namepdf = nammepd.strip()
             name = namme.strip()
             if "videos.classplusapp" in url:
             	headers = {'Host': 'api.classplusapp.com', 'x-access-token': 'eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJpZCI6MzgzNjkyMTIsIm9yZ0lkIjoyNjA1LCJ0eXBlIjoxLCJtb2JpbGUiOiI5MTcwODI3NzQyODkiLCJuYW1lIjoiQWNlIiwiZW1haWwiOm51bGwsImlzRmlyc3RMb2dpbiI6dHJ1ZSwiZGVmYXVsdExhbmd1YWdlIjpudWxsLCJjb3VudHJ5Q29kZSI6IklOIiwiaXNJbnRlcm5hdGlvbmFsIjowLCJpYXQiOjE2NDMyODE4NzcsImV4cCI6MTY0Mzg4NjY3N30.hM33P2ai6ivdzxPPfm01LAd4JWv-vnrSxGXqvCirCSpUfhhofpeqyeHPxtstXwe0', 'user-agent': 'Mobile-Android', 'app-version': '1.4.37.1', 'api-version': '18', 'device-id': '5d0d17ac8b3c9f51', 'device-details': '2848b866799971ca_2848b8667a33216c_SDK-30', 'accept-encoding': 'gzip'}
@@ -500,7 +502,7 @@ async def txt_handler(bot: Client, m: Message):
             try:
                 Show = f"**Trying To Download:-**\n\n**Name :-** `{name}`\n**Quality :-** `{res}`\n\n**Piracy is illegal 🚫**\n\nEnter /terms To know our terms and conditions."
                 prog = await m.reply_text(Show)
-                cc = f'**Index: **{str(count).zfill(3)}\n**File Name: **{name}.mkv\n**Batch: **{b_name}\n\n**{creditx}**'
+                cc = f'**Index ➤ **{str(count).zfill(3)}**     Quality ➤** {res}\n**Title ➤ **{namepdf}.mkv\n**Batch ➤ **{b_name}\n\n**{creditx}**'
                 if "cwmediabkt99" in url:
                     
                     try:
@@ -519,7 +521,7 @@ async def txt_handler(bot: Client, m: Message):
                           out_file.write(data)
                         await prog.delete (True)
                         time.sleep(1)
-                        copy = await bot.send_document(chat_id=m.chat.id,document=f'{name}.pdf', caption=f'**Index: ** {str(count).zfill(3)}\n**File Name: ** {name}.pdf\n**Batch: ** {b_name}\n\n{creditx}')
+                        copy = await bot.send_document(chat_id=m.chat.id,document=f'{namepdf}.pdf', caption=f'**Index➤ ** {str(count).zfill(3)}\n**Title ➤ ** {name}.pdf\n**Batch ➤ ** {b_name}\n\n{creditx}')
                         await copy.copy(chat_id = log_channel)
                         count += 1
                         await reply.delete (True)   
@@ -545,7 +547,7 @@ async def txt_handler(bot: Client, m: Message):
                         time.sleep(1)
                         reply = await m.reply_text(f"Trying To Upload - `{name}`")
                         time.sleep(1)
-                        copy = await bot.send_document(chat_id = m.chat.id, document = ka, caption=f'**Index: ** {str(count).zfill(3)}\n**File Name: ** {name}.pdf\n**Batch: ** {b_name}\n\n{creditx}')
+                        copy = await bot.send_document(chat_id = m.chat.id, document = ka, caption=f'**Index ➤ ** {str(count).zfill(3)}\n**Title ➤  ** {namepdf}.pdf\n**Batch ➤ ** {b_name}\n\n{creditx}')
                         await copy.copy(chat_id = log_channel)
                         count+=1
                         await reply.delete (True)
@@ -566,7 +568,7 @@ async def txt_handler(bot: Client, m: Message):
                     await helper.send_vid(bot, m,cc,filename,thumb,name,prog)
                     count+=1
                     time.sleep(1)
-                    os.remove(res_file)
+                    
             except Exception as e:
                 logging.error(e)
                 await m.reply_text(f"**Failed To Download ❌**\n**Name** - {name}\n**Link** - `{url}`")
